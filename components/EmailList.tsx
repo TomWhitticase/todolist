@@ -17,7 +17,7 @@ export default function EmailList({ setShowEmailList, tasks }: IProps) {
           {tasks.map((task) => {
             return task.checked ? (
               <li style={{ textDecorationLine: "line-through" }}>
-                {task.name}
+                {task.name} ✓
               </li>
             ) : (
               <li>{task.name}</li>
@@ -55,9 +55,6 @@ export default function EmailList({ setShowEmailList, tasks }: IProps) {
       email: emailInput,
       message: getTasksAsEmail(),
     };
-
-    console.log(data.message);
-    return;
 
     fetch("/api/email", {
       method: "POST",

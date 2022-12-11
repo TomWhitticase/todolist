@@ -7,7 +7,7 @@ interface IProps {
   toggleCheck: any;
 }
 
-export default function ({ task, deleteTask, toggleCheck }: IProps) {
+export default function Task({ task, deleteTask, toggleCheck }: IProps) {
   return (
     <>
       <div className="p-2 w-full shadow-sm border-2 border-gray-200 rounded-md flex gap-2 justify-between items-center">

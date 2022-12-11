@@ -9,7 +9,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import EmailList from "./EmailList";
 
-export default function () {
+export default function Container() {
   const [tasks, setTasks] = useState<ITask[]>([]);
   const [showEmailList, setShowEmailList] = useState(false);
 
