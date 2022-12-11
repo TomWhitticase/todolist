@@ -27,3 +27,7 @@
   animation-iteration-count: 1;
   animation-fill-mode: forwards;
 }
+
+body {
+  @apply bg-gradient-to-r from-cyan-500 to-blue-500 h-screen;
+}

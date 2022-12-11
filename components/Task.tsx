@@ -24,11 +24,13 @@ export default function Task({ task, deleteTask, toggleCheck }: IProps) {
           </button>
 
           <h2
-            className={`text-xl transition-all duration-300 ${
+            className={`text-xl transition-all duration-300 max-w-[10rem] overflow-x-hidden ${
               task.checked && `strike`
             }`}
           >
-            {task.name}
+            {/* //limit to 20 characters displayed */}
+            {task.name.slice(0, 20)}
+            {task.name.slice(0, 20) !== task.name && "..."}
           </h2>
         </div>
         <div className="flex gap-4 text-3xl ">

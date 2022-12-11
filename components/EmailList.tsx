@@ -24,7 +24,7 @@ export default function EmailList({ setShowEmailList, tasks }: IProps) {
             );
           })}
         </ul>
-        <a>Sent from todolist.com</a>
+        <a>Sent from https://todolist-chi-sooty.vercel.app/</a>
       </>
     );
   };
@@ -97,7 +97,8 @@ export default function EmailList({ setShowEmailList, tasks }: IProps) {
   const [emailInput, setEmailInput] = useState<string>("");
   return (
     <>
-      <div className="flex gap-4">
+      <h1 className="text-xl font-bold text-center">Email Your To-do List</h1>
+      <div className="flex gap-4 flex-wrap justify-center items-center">
         <input
           className="border-black border-2 p-1"
           type="email"

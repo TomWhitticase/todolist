@@ -5,6 +5,7 @@ import { GrClose } from "react-icons/gr";
 import Task from "./Task";
 import Modal from "./Modal";
 import { ToastContainer, toast } from "react-toastify";
+import { FaEnvelope } from "react-icons/fa";
 
 import "react-toastify/dist/ReactToastify.css";
 import EmailList from "./EmailList";
@@ -74,19 +75,19 @@ export default function Container() {
   };
 
   const toggleCheck = (id: number) => {
-    setTasks(
-      tasks.map((task) => {
-        if (task.id === id) {
-          task.checked = !task.checked;
-        }
-        return task;
-      })
-    );
+    const newTasks = tasks.map((task) => {
+      if (task.id === id) {
+        task.checked = !task.checked;
+      }
+      return task;
+    });
+    setTasks(newTasks);
+    saveToLocalStorage(newTasks);
   };
 
   return (
     <>
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col items-center justify-center gap-4">
         <ToastContainer />
         <Modal setOpen={setShowInputTask} open={showInputTask}>
           <>
@@ -97,7 +98,7 @@ export default function Container() {
               <GrClose />
             </button>
 
-            <h1 className="font-bold text-center text-3xl">Add new task</h1>
+            <h1 className="font-bold text-center text-xl">Add a new task</h1>
             <input
               type="text"
               placeholder="name"
@@ -118,7 +119,7 @@ export default function Container() {
             </button>
           </>
         </Modal>
-        <div className="p-2 flex flex-col gap-2 w-full h-[30rem] overflow-y-auto">
+        <div className="p-2 flex flex-col gap-2 w-full items-start overflow-y-auto max-h-[20rem]">
           {tasks.map((task, i) => {
             return (
               <Task
@@ -129,6 +130,11 @@ export default function Container() {
               />
             );
           })}
+          {tasks.length === 0 && (
+            <div className="flex justify-center items-center p-4 w-full bg-gray-100 rounded-lg shadow">
+              Add some items to your list!
+            </div>
+          )}
           <div className="w-full flex justify-center items-center">
             <button
               className="text-5xl hover:text-green-500 duration-300"
@@ -142,9 +148,9 @@ export default function Container() {
         </div>
         <button
           onClick={() => setShowEmailList(true)}
-          className="bg-blue-500 p-4 rounded text-white"
+          className="bg-blue-500 px-4 py-2 rounded text-white flex gap-2 items-center justify-center"
         >
-          Email me my To-do list!
+          <FaEnvelope /> Email My List
         </button>
         <Modal setOpen={setShowEmailList} open={showEmailList}>
           <EmailList tasks={tasks} setShowEmailList={setShowEmailList} />
