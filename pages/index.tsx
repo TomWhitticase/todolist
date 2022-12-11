@@ -8,7 +8,7 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>My todolist</title>
+        <title>My To-do List</title>
         <meta name="description" content="todolist" />
         <link rel="icon" href="/favicon.ico" />
       </Head>

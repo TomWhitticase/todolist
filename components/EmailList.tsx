@@ -67,7 +67,7 @@ export default function EmailList({ setShowEmailList, tasks }: IProps) {
       console.log("Response received");
       if (res.status === 200) {
         setSendingEmail(false);
-        toast.success("Message sent!", {
+        toast.success("To-do List sent!", {
           position: "top-center",
           autoClose: 5000,
           hideProgressBar: false,
