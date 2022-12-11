@@ -1,3 +1,4 @@
+import { Box, Card, Divider, Typography } from "@mui/material";
 import Head from "next/head";
 import Image from "next/image";
 import Container from "../components/Container";
@@ -12,13 +13,21 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className="flex justify-center items-center flex-col gap-4 h-screen">
-        <div className="rounded p-4 shadow-lg bg-white">
-          <div className="flex justify-center items-center p-4">
-            <h1 className="text-3xl font-bold">My To-do List</h1>
-          </div>
-
+        <Card sx={{ width: "100%", maxWidth: "25rem" }}>
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              flexDirection: "column",
+              padding: 2,
+            }}
+          >
+            <Typography variant="h4">My To-do List</Typography>
+          </Box>
+          <Divider />
           <Container />
-        </div>
+        </Card>
         <a
           className="fixed w-full text-center bottom-4 text-white"
           href="https://www.tomwhitticase.com"

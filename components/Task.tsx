@@ -1,5 +1,9 @@
 import { ITask } from "../@types/Task.d";
-import { BiCheckbox, BiCheckboxChecked, BiTrash } from "react-icons/bi";
+import CheckBoxOutlineBlankIcon from "@mui/icons-material/CheckBoxOutlineBlank";
+import CheckBoxIcon from "@mui/icons-material/CheckBox";
+import DeleteIcon from "@mui/icons-material/Delete";
+import { Card, Typography } from "@mui/material";
+import { Box } from "@mui/system";
 
 interface IProps {
   task: ITask;
@@ -10,38 +14,45 @@ interface IProps {
 export default function Task({ task, deleteTask, toggleCheck }: IProps) {
   return (
     <>
-      <div className="p-2 w-full shadow-sm border-2 border-gray-200 rounded-md flex gap-2 justify-between items-center">
-        <div className="flex gap-2 items-center justify-center  ">
-          <button
-            className="text-4xl hover:text-green-500 duration-300"
-            onClick={() => toggleCheck(task.id)}
-          >
-            {task.checked ? (
-              <BiCheckboxChecked className="text-green-500" />
-            ) : (
-              <BiCheckbox />
-            )}
-          </button>
+      <Card
+        sx={{
+          width: "100%",
+          display: "flex",
+          gap: 1,
+          justifyContent: "space-between",
+          alignItems: "center",
+          padding: 2,
+        }}
+      >
+        <button
+          className="text-4xl hover:text-green-500 duration-300 flex items-center justify-center"
+          onClick={() => toggleCheck(task.id)}
+        >
+          {task.checked ? (
+            <CheckBoxIcon className="text-green-500" />
+          ) : (
+            <CheckBoxOutlineBlankIcon />
+          )}
+        </button>
 
-          <h2
-            className={`text-xl transition-all duration-300 max-w-[10rem] overflow-x-hidden ${
-              task.checked && `strike`
-            }`}
-          >
-            {/* //limit to 20 characters displayed */}
-            {task.name.slice(0, 20)}
-            {task.name.slice(0, 20) !== task.name && "..."}
-          </h2>
-        </div>
-        <div className="flex gap-4 text-3xl ">
-          <button
-            onClick={() => deleteTask(task.id)}
-            className="hover:text-red-500 duration-300"
-          >
-            <BiTrash />
-          </button>
-        </div>
-      </div>
+        <Box
+          sx={{
+            maxWidth: "20rem",
+            overflowX: "hidden",
+            width: "100%",
+            textDecorationLine: task.checked ? "line-through" : "none",
+          }}
+        >
+          {task.name}
+        </Box>
+
+        <button
+          onClick={() => deleteTask(task.id)}
+          className="hover:text-red-500 duration-300 flex justify-center items-center"
+        >
+          <DeleteIcon />
+        </button>
+      </Card>
     </>
   );
 }

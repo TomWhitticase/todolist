@@ -1,14 +1,15 @@
-import { SetStateAction, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { ITask } from "../@types/Task.d";
-import { AiOutlinePlusCircle } from "react-icons/ai";
+import SendIcon from "@mui/icons-material/Send";
+import AddIcon from "@mui/icons-material/Add";
 import { GrClose } from "react-icons/gr";
 import Task from "./Task";
 import Modal from "./Modal";
 import { ToastContainer, toast } from "react-toastify";
-import { FaEnvelope } from "react-icons/fa";
 
 import "react-toastify/dist/ReactToastify.css";
 import EmailList from "./EmailList";
+import { Box, Button, Card, Fab, TextField, Typography } from "@mui/material";
 
 export default function Container() {
   const [tasks, setTasks] = useState<ITask[]>([]);
@@ -87,39 +88,52 @@ export default function Container() {
 
   return (
     <>
-      <div className="flex flex-col items-center justify-center gap-4">
+      <Box
+        sx={{
+          padding: 2,
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          flexDirection: "column",
+        }}
+      >
         <ToastContainer />
         <Modal setOpen={setShowInputTask} open={showInputTask}>
           <>
-            <button
-              className="absolute top-2 right-2"
-              onClick={() => setShowInputTask(false)}
-            >
-              <GrClose />
-            </button>
-
-            <h1 className="font-bold text-center text-xl">Add a new task</h1>
-            <input
+            <Typography sx={{ textAlign: "center" }} variant={"h6"}>
+              Create a new Task
+            </Typography>
+            <TextField
               type="text"
-              placeholder="name"
-              className="px-2 py-1 border-2 border-black"
+              label="New Task"
+              placeholder="Task Name"
               onChange={(input) => {
                 setName(input.target.value);
               }}
             />
 
-            <button
+            <Button
+              variant="contained"
               onClick={() => {
                 addNewTask();
                 setName("");
               }}
-              className="bg-green-500 hover:bg-green-400 active:bg-green-600 hover:scale-[1.05] transition-all duration-300 text-white py-1 px-4 rounded"
             >
               Create
-            </button>
+            </Button>
           </>
         </Modal>
-        <div className="p-2 flex flex-col gap-2 w-full items-start overflow-y-auto max-h-[20rem]">
+        <Box
+          sx={{
+            width: "100%",
+            padding: 2,
+            display: "flex",
+            flexDirection: "column",
+            gap: 1,
+            maxHeight: "20rem",
+            overflowX: "auto",
+          }}
+        >
           {tasks.map((task, i) => {
             return (
               <Task
@@ -131,31 +145,30 @@ export default function Container() {
             );
           })}
           {tasks.length === 0 && (
-            <div className="flex justify-center items-center p-4 w-full bg-gray-100 rounded-lg shadow">
-              Add some items to your list!
-            </div>
+            <Card sx={{ padding: 2 }}>Add some items to your list!</Card>
           )}
           <div className="w-full flex justify-center items-center">
-            <button
-              className="text-5xl hover:text-green-500 duration-300"
-              onClick={() => {
-                setShowInputTask(true);
-              }}
+            <Fab
+              color="primary"
+              aria-label="add"
+              onClick={() => setShowInputTask(true)}
             >
-              <AiOutlinePlusCircle />
-            </button>
+              <AddIcon />
+            </Fab>
           </div>
-        </div>
-        <button
+        </Box>
+
+        <Button
+          sx={{ display: "flex", gap: 1 }}
+          variant="outlined"
           onClick={() => setShowEmailList(true)}
-          className="bg-blue-500 px-4 py-2 rounded text-white flex gap-2 items-center justify-center"
         >
-          <FaEnvelope /> Email My List
-        </button>
+          <SendIcon /> Email My List
+        </Button>
         <Modal setOpen={setShowEmailList} open={showEmailList}>
           <EmailList tasks={tasks} setShowEmailList={setShowEmailList} />
         </Modal>
-      </div>
+      </Box>
     </>
   );
 }

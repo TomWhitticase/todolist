@@ -1,4 +1,4 @@
-import { Input } from "@mui/material";
+import { Button, Input, TextField, Typography } from "@mui/material";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import { ITask } from "../@types/Task.d";
@@ -24,7 +24,7 @@ export default function EmailList({ setShowEmailList, tasks }: IProps) {
             );
           })}
         </ul>
-        <a>Sent from https://todolist-chi-sooty.vercel.app/</a>
+        <a>Created with https://todolist-seven-neon.vercel.app/</a>
       </>
     );
   };
@@ -97,23 +97,22 @@ export default function EmailList({ setShowEmailList, tasks }: IProps) {
   const [emailInput, setEmailInput] = useState<string>("");
   return (
     <>
-      <h1 className="text-xl font-bold text-center">Email Your To-do List</h1>
+      <Typography sx={{ textAlign: "center" }} variant={"h6"}>
+        Email Your To-do List
+      </Typography>
       <div className="flex gap-4 flex-wrap justify-center items-center">
-        <input
-          className="border-black border-2 p-1"
-          type="email"
-          placeholder="Your email address"
+        <TextField
+          label="Email Address"
+          variant="outlined"
           onChange={(input) => {
             setEmailInput(input.target.value);
           }}
+          placeholder="Your email address"
         />
-        <div className="bg-blue-500 text-white rounded">
+
+        <div className="">
           {sendingEmail ? (
-            <button
-              type="button"
-              className="py-2 px-4 flex items-center"
-              disabled={true}
-            >
+            <Button variant="contained" disabled={true}>
               <svg
                 className="w-5 h-5 mr-3 -ml-1 text-white animate-spin"
                 xmlns="http://www.w3.org/2000/svg"
@@ -135,11 +134,11 @@ export default function EmailList({ setShowEmailList, tasks }: IProps) {
                 ></path>
               </svg>
               Sending...
-            </button>
+            </Button>
           ) : (
-            <button className="py-2 px-4" onClick={sendEmail}>
+            <Button variant="contained" onClick={sendEmail}>
               Send
-            </button>
+            </Button>
           )}
         </div>
       </div>
