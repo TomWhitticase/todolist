@@ -13,19 +13,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className="flex justify-center items-center flex-col gap-4 h-screen">
-        <Card sx={{ width: "100%", maxWidth: "25rem" }}>
-          <Box
-            sx={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              flexDirection: "column",
-              padding: 2,
-            }}
-          >
-            <Typography variant="h4">My To-do List</Typography>
-          </Box>
-          <Divider />
+        <Card sx={{ margin: "2rem" }}>
           <Container />
         </Card>
         <a
